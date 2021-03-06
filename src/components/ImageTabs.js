@@ -22,7 +22,6 @@ const ImageTabs = ({ tabs }) => {
   return (
     <View style={styles.wrapper}>
       <ScrollView
-        horizontal
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent}>
         {tabs.map((item, index) => (
