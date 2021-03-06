@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native'
 import PropTypes from 'prop-types'
 
 import ImageSlider from './ImageSliser'
@@ -14,13 +20,21 @@ const ImageTabs = ({ tabs }) => {
   }
 
   return (
-    <View>
-      <ScrollView>
+    <View style={styles.wrapper}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollViewContent}>
         {tabs.map((item, index) => (
           <TouchableOpacity
             key={item.name}
             onPress={() => setCurrentTabIndex(index)}>
-            <Text>{item.name}</Text>
+            <Text
+              style={[
+                styles.tabText,
+                index === currentTabIndex ? styles.tabSelectedText : null,
+              ]}>
+              {item.name}
+            </Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -37,5 +51,27 @@ ImageTabs.propTypes = {
     }),
   ).isRequired,
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    marginTop: '5%',
+  },
+  scrollView: {
+    maxHeight: '5%',
+  },
+  scrollViewContent: {
+    paddingLeft: '3%',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  tabText: {
+    marginRight: '2%',
+    opacity: 0.7,
+  },
+  tabSelectedText: {
+    opacity: 1,
+  },
+})
 
 export default ImageTabs
